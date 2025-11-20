@@ -19,4 +19,59 @@
     <app-root></app-root>
   <script src="runtime.060f030aaecedfb7.js" type="module"></script><script src="polyfills.9aa83d7632b47e15.js" type="module"></script><script src="main.036e1a2274564cd8.js" type="module"></script>
 
+<!-- チャットウィジェット開始 (ここから下の部分を追加しました) -->
+<div id="chat-widget-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; font-family: Roboto, sans-serif; display: flex; flex-direction: column; align-items: flex-end;">
+  
+  <!-- チャットウィンドウ (初期状態は非表示) -->
+  <div id="chat-window" style="display: none; width: 350px; height: 500px; background: #333; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); margin-bottom: 16px; overflow: hidden; border: 1px solid #555; flex-direction: column; max-width: 90vw; max-height: 70vh;">
+    <!-- ヘッダー -->
+    <div style="background: #212121; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #444;">
+      <span style="color: white; font-size: 14px; font-weight: 500; display: flex; align-items: center;">
+        <span style="width: 8px; height: 8px; background-color: #4caf50; border-radius: 50%; margin-right: 8px;"></span>
+        Chat Room
+      </span>
+      <button onclick="toggleChat()" style="background: none; border: none; color: #aaa; cursor: pointer; font-size: 20px; padding: 0; line-height: 1;">&times;</button>
+    </div>
+    
+    <!-- 埋め込みコンテンツ -->
+    <div style="flex-grow: 1; position: relative; background: white;">
+      <iframe src="https://yellowbronzedalmatian.vercel.app/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+  </div>
+
+  <!-- トグルボタン -->
+  <button id="chat-toggle-btn" onclick="toggleChat()" style="width: 56px; height: 56px; border-radius: 50%; background-color: #c2185b; color: white; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, background-color 0.2s;">
+    <!-- チャットアイコンSVG -->
+    <svg id="icon-chat" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    
+    <!-- 閉じるアイコンSVG (初期は非表示) -->
+    <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  </button>
+</div>
+
+<script>
+  function toggleChat() {
+    const windowEl = document.getElementById('chat-window');
+    const btnEl = document.getElementById('chat-toggle-btn');
+    const iconChat = document.getElementById('icon-chat');
+    const iconClose = document.getElementById('icon-close');
+
+    if (windowEl.style.display === 'none') {
+      // 開く処理
+      windowEl.style.display = 'flex';
+      iconChat.style.display = 'none';
+      iconClose.style.display = 'block';
+      btnEl.style.backgroundColor = '#ad1457'; // クリック時の色変更
+    } else {
+      // 閉じる処理
+      windowEl.style.display = 'none';
+      iconChat.style.display = 'block';
+      iconClose.style.display = 'none';
+      btnEl.style.backgroundColor = '#c2185b';
+    }
+  }
+</script>
+<!-- チャットウィジェット終了 -->
+
 </body></html>
+
